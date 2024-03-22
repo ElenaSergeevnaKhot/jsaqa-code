@@ -14,7 +14,7 @@ afterEach(() => {
   page.close();
 });
 
-describe("Github page tests", () => {
+describe("Github page tests", async () => {
   test("The h1 header content'", async () => {
     const firstLink = await page.$("header div div a");
     await firstLink.click();
@@ -37,15 +37,12 @@ describe("Github page tests", () => {
     expect(actual).toContain("Get started with Team")
   }, 15000);
 
-  describe("Github page tests Two", () => {
-    beforeEach(async () => {
-      page1 = await browser.newPage();
-      await page1.goto("https://github.com/features/actions");
-    })
+  test("Github page tests Two", async () => 
+      page1 = await browser.newPage(),
+      await page1.goto("https://github.com/features/actions")
+    );
     
-    afterEach(() => {
-      page1.close();
-    })
+    
   
     test("The h1 header content'", async () => {
       const firstLink = await page1.$("header div div a");
@@ -72,5 +69,5 @@ describe("Github page tests", () => {
       const actual = await page.$eval(btnSelector, link => link.textContent);
       expect(actual).toContain("Sign up for free")
     }, 30000);
-  })
-});
+  });
+
